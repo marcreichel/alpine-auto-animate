@@ -554,7 +554,8 @@
         expression,
         modifiers
       }, {
-        evaluate
+        evaluateLater,
+        effect
       }) => {
         let config = {};
         const durationModifier = modifiers.filter(modifier => modifier.match(/^\d+m?s$/))[0] || null;
@@ -571,9 +572,22 @@
           config.easing = easingModifier;
         }
 
-        autoAnimate(el, { ...autoAnimateConfig,
+        const controller = autoAnimate(el, { ...autoAnimateConfig,
           ...config
         });
+
+        if (expression) {
+          const isEnabled = evaluateLater(expression);
+          effect(() => {
+            isEnabled(enabled => {
+              if (enabled) {
+                controller.enable();
+              } else {
+                controller.disable();
+              }
+            });
+          });
+        }
       });
     }
 
