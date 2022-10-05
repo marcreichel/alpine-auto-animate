@@ -3,7 +3,7 @@ import autoAnimate from '@formkit/auto-animate';
 let autoAnimateConfig = {};
 
 function AutoAnimate(Alpine) {
-    Alpine.directive('auto-animate', (el, { expression, modifiers }, { evaluate }) => {
+    Alpine.directive('auto-animate', (el, { expression, modifiers }, { evaluateLater, effect }) => {
         let config = {};
         const durationModifier = modifiers.filter((modifier) => modifier.match(/^\d+m?s$/))[0] || null;
         if (durationModifier) {
@@ -15,7 +15,19 @@ function AutoAnimate(Alpine) {
         if (easingModifier) {
             config.easing = easingModifier;
         }
-        autoAnimate(el, { ...autoAnimateConfig, ...config });
+        const controller = autoAnimate(el, { ...autoAnimateConfig, ...config });
+        if (expression) {
+            const isEnabled = evaluateLater(expression);
+            effect(() => {
+                isEnabled((enabled) => {
+                    if (enabled) {
+                        controller.enable();
+                    } else {
+                        controller.disable();
+                    }
+                });
+            })
+        }
     });
 }
 

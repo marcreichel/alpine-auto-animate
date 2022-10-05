@@ -91,6 +91,23 @@ To adjust the easing function add it as a modifier:
 </ul>
 ```
 
+### Toggle animations
+
+In some situations it may be necessary to disable animations and re-enable them later.
+
+For this you can provide a boolean to the directive like so:
+
+```html
+<div x-data="{ enabled: true }">
+    <ul x-auto-animate="enabled">
+        <!-- ... -->
+    </ul>
+    <button @click="enabled = !enabled" type="button">
+        Toggle animations
+    </button>
+</div>
+```
+
 ## Global config
 
 If you are using the `npm` installation method for this package or the ESM distribution, you can use the

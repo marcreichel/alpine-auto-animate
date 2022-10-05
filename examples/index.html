@@ -31,15 +31,23 @@
     <script defer src="../dist/alpine-auto-animate.min.js"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body x-data="{ todo: '', list: [], add() { this.list.push(this.todo); this.todo = ''; } }">
+<body x-data="{ todo: '', list: [], enabled: true, add() { this.list.push(this.todo); this.todo = ''; } }">
 <div>
-    <ul x-auto-animate.ease-in-out>
+    <ul x-auto-animate.ease-in-out="enabled">
         <template x-for="item in list">
             <li x-text="item"></li>
         </template>
     </ul>
     <input type="text" x-model="todo" placeholder="Todo ..." @keydown.enter="add()">
-    <button @click="add()">Add</button>
+    <button type="button" @click="add()">Add</button>
+    <button type="button" @click="enabled = !enabled">
+        <template x-if="enabled">
+            <span>🚫 Disable animations</span>
+        </template>
+        <template x-if="!enabled">
+            <span>✅ Enable animations</span>
+        </template>
+    </button>
 </div>
 </body>
 </html>
