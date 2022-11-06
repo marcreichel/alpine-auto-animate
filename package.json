@@ -1,45 +1,46 @@
 {
-  "name": "@marcreichel/alpine-auto-animate",
-  "version": "0.0.0",
-  "description": "An Alpine.js wrapper for @formkit/auto-animate.",
-  "license": "MIT",
-  "author": {
-    "name": "Marc Reichel",
-    "url": "https://marcreichel.dev/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/marcreichel/alpine-auto-animate.git"
-  },
-  "main": "src/index.js",
-  "scripts": {
-    "build": "rollup -c",
-    "watch": "rollup -c -w"
-  },
-  "bugs": {
-    "url": "https://github.com/marcreichel/alpine-auto-animate/issues"
-  },
-  "homepage": "https://github.com/marcreichel/alpine-auto-animate#readme",
-  "dependencies": {
-    "@formkit/auto-animate": "^1.0.0-beta.3"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.19.1",
-    "@babel/preset-env": "^7.19.1",
-    "@rollup/plugin-typescript": "^9.0.2",
-    "@types/alpinejs": "^3.7.1",
-    "rollup": "^2.79.0",
-    "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-filesize": "^9.1.2",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-terser": "^7.0.2",
-    "tslib": "^2.4.1"
-  },
-  "files": [
-    "LICENSE",
-    "README.md",
-    "src/index.js",
-    "package.json",
-    "dist"
-  ]
+    "name": "@marcreichel/alpine-auto-animate",
+    "version": "0.0.0",
+    "description": "An Alpine.js wrapper for @formkit/auto-animate.",
+    "license": "MIT",
+    "author": {
+        "name": "Marc Reichel",
+        "url": "https://marcreichel.dev/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/marcreichel/alpine-auto-animate.git"
+    },
+    "main": "src/index.js",
+    "scripts": {
+        "build": "rollup -c",
+        "watch": "rollup -c -w"
+    },
+    "bugs": {
+        "url": "https://github.com/marcreichel/alpine-auto-animate/issues"
+    },
+    "homepage": "https://github.com/marcreichel/alpine-auto-animate#readme",
+    "dependencies": {
+        "@formkit/auto-animate": "^1.0.0-beta.3"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.19.1",
+        "@babel/preset-env": "^7.19.1",
+        "@rollup/plugin-typescript": "^9.0.2",
+        "@types/alpinejs": "^3.7.1",
+        "prettier": "^2.7.1",
+        "rollup": "^2.79.0",
+        "rollup-plugin-babel": "^4.4.0",
+        "rollup-plugin-filesize": "^9.1.2",
+        "rollup-plugin-node-resolve": "^5.2.0",
+        "rollup-plugin-terser": "^7.0.2",
+        "tslib": "^2.4.1"
+    },
+    "files": [
+        "LICENSE",
+        "README.md",
+        "src/index.js",
+        "package.json",
+        "dist"
+    ]
 }

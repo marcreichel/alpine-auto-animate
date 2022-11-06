@@ -1,10 +1,10 @@
-name: Build
+name: Prettier
 
 on:
     - pull_request
 
 jobs:
-    build:
+    prettier:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
@@ -12,4 +12,4 @@ jobs:
               with:
                   node-version: ^16.0.0
             - run: npm install
-            - run: npm run build
+            - run: npx prettier --check .
