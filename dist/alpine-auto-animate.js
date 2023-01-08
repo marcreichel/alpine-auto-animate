@@ -3,32 +3,6 @@
     factory();
 })((function () { 'use strict';
 
-    /******************************************************************************
-    Copyright (c) Microsoft Corporation.
-
-    Permission to use, copy, modify, and/or distribute this software for any
-    purpose with or without fee is hereby granted.
-
-    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-    AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-    LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-    OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-    PERFORMANCE OF THIS SOFTWARE.
-    ***************************************************************************** */
-
-    var __assign = function() {
-        __assign = Object.assign || function __assign(t) {
-            for (var s, i = 1, n = arguments.length; i < n; i++) {
-                s = arguments[i];
-                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-            }
-            return t;
-        };
-        return __assign.apply(this, arguments);
-    };
-
     /**
      * A set of all the parents currently being observe. This is the only non weak
      * registry.
@@ -573,44 +547,56 @@
         });
     }
 
-    var autoAnimateConfig = {};
+    let autoAnimateConfig = {};
+
     function AutoAnimate(Alpine) {
-        Alpine.directive('auto-animate', function (el, _a, _b) {
-            var expression = _a.expression, modifiers = _a.modifiers;
-            var evaluateLater = _b.evaluateLater, effect = _b.effect;
-            var config = {};
-            var durationModifier = modifiers.filter(function (modifier) { return modifier.match(/^\d+m?s$/); })[0] || null;
-            if (durationModifier) {
-                var inMilliseconds = !!durationModifier.match(/ms$/);
-                var matchedDuration = +durationModifier.match(/^\d+/);
-                config.duration = matchedDuration * (inMilliseconds ? 1 : 1000);
-            }
-            var easingModifier = modifiers.filter(function (modifier) { return !modifier.match(/^\d+m?s$/); })[0] || null;
-            if (easingModifier) {
-                config.easing = easingModifier;
-            }
-            var controller = autoAnimate(el, __assign(__assign({}, autoAnimateConfig), config));
-            if (expression) {
-                var isEnabled_1 = evaluateLater(expression);
-                effect(function () {
-                    isEnabled_1(function (enabled) {
-                        if (enabled) {
-                            controller.enable();
-                        }
-                        else {
-                            controller.disable();
-                        }
-                    });
-                });
-            }
+      Alpine.directive('auto-animate', (el, {
+        expression,
+        modifiers
+      }, {
+        evaluateLater,
+        effect
+      }) => {
+        let config = {};
+        const durationModifier = modifiers.filter(modifier => modifier.match(/^\d+m?s$/))[0] || null;
+
+        if (durationModifier) {
+          const inMilliseconds = !!durationModifier.match(/ms$/);
+          const matchedDuration = +durationModifier.match(/^\d+/);
+          config.duration = matchedDuration * (inMilliseconds ? 1 : 1000);
+        }
+
+        const easingModifier = modifiers.filter(modifier => !modifier.match(/^\d+m?s$/))[0] || null;
+
+        if (easingModifier) {
+          config.easing = easingModifier;
+        }
+
+        const controller = autoAnimate(el, { ...autoAnimateConfig,
+          ...config
         });
+
+        if (expression) {
+          const isEnabled = evaluateLater(expression);
+          effect(() => {
+            isEnabled(enabled => {
+              if (enabled) {
+                controller.enable();
+              } else {
+                controller.disable();
+              }
+            });
+          });
+        }
+      });
     }
-    AutoAnimate.configure = function (config) {
-        autoAnimateConfig = config;
+
+    AutoAnimate.configure = config => {
+      autoAnimateConfig = config;
     };
 
-    document.addEventListener('alpine:init', function () {
-        AutoAnimate(window.Alpine);
+    document.addEventListener('alpine:init', () => {
+      AutoAnimate(window.Alpine);
     });
 
 }));

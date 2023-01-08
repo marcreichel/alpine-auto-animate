@@ -32,10 +32,7 @@
 Include the following `<script>` tag in the `<head>` of your document, just before Alpine.
 
 ```html
-<script
-    src="https://cdn.jsdelivr.net/npm/@marcreichel/alpine-auto-animate@latest/dist/alpine-auto-animate.min.js"
-    defer
-></script>
+<script src="https://cdn.jsdelivr.net/npm/@marcreichel/alpine-auto-animate@latest/dist/alpine-auto-animate.min.js" defer></script>
 ```
 
 ### NPM
@@ -105,7 +102,9 @@ For this you can provide a boolean to the directive like so:
     <ul x-auto-animate="enabled">
         <!-- ... -->
     </ul>
-    <button @click="enabled = !enabled" type="button">Toggle animations</button>
+    <button @click="enabled = !enabled" type="button">
+        Toggle animations
+    </button>
 </div>
 ```
 
@@ -117,13 +116,11 @@ If you are using the `npm` installation method for this package or the ESM distr
 ```javascript
 import AutoAnimate from '@marcreichel/alpine-auto-animate';
 
-Alpine.plugin(
-    AutoAnimate.configure({
-        duration: 1000,
-        easing: 'linear',
-        disrespectUserMotionPreference: true,
-    }),
-);
+Alpine.plugin(AutoAnimate.configure({
+    duration: 1000,
+    easing: 'linear',
+    disrespectUserMotionPreference: true,
+}));
 ```
 
 ## 📄 License
