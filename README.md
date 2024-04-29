@@ -9,7 +9,7 @@
     <img src="https://img.shields.io/github/v/tag/marcreichel/alpine-auto-animate?label=version" alt="version">
   </a>
   <a href="https://www.npmjs.com/package/@marcreichel/alpine-auto-animate">
-    <img src="https://img.badgesize.io/marcreichel/alpine-auto-animate/main/dist/alpine-auto-animate.min.js.svg?compression=gzip&color=green" alt="Build size">
+    <img src="https://img.shields.io/bundlephobia/minzip/%40marcreichel%2Falpine-auto-animate" alt="Build size">
   </a>
   <a href="https://www.npmjs.com/package/@marcreichel/alpine-auto-animate">
     <img src="https://img.shields.io/npm/dt/@marcreichel/alpine-auto-animate" alt="downloads">
